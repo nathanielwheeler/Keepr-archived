@@ -74,6 +74,8 @@ namespace Keepr
 			{
 				endpoints.MapControllers();
 			});
+			app.UseDefaultFiles();
+			app.UseStaticFiles();
 		}
 	}
 }
