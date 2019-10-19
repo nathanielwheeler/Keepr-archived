@@ -1,25 +1,41 @@
 using System;
+using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
 
 namespace Keepr.Services
 {
-	public class KeepsService : BaseApiService<Keep, string>
+	public class KeepsService
 	{
 		private readonly KeepsRepository _repo;
-		public KeepsService(KeepsRepository repo) : base(repo)
+		public KeepsService(KeepsRepository repo)
 		{
 			_repo = repo;
 		}
 
-		internal object Create(Keep newKeep)
+		public IEnumerable<Keep> Get()
+		{
+			return _repo.Get();
+		}
+
+		public Keep Get(string id)
+		{
+			Keep exists = _repo.Get(id);
+			if (exists == null)
+			{
+				throw new Exception("Invalid Id");
+			}
+			return exists;
+		}
+
+		public Keep Create(Keep newKeep)
 		{
 			newKeep.Id = Guid.NewGuid().ToString();
 			_repo.Create(newKeep);
 			return newKeep;
 		}
 
-		internal object Edit(Keep newKeep)
+		public Keep Edit(Keep newKeep)
 		{
 			Keep keep = _repo.Get(newKeep.Id);
 			if (keep == null) { throw new Exception("Invalid Id"); }
@@ -34,7 +50,7 @@ namespace Keepr.Services
 			return keep;
 		}
 
-		internal object Delete(string id)
+		public string Delete(string id)
 		{
 			Keep keep = _repo.Get(id);
 			if (keep == null) { throw new Exception("Invalid Id"); }

@@ -1,16 +1,29 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using Dapper;
 using Keepr.Models;
 
 namespace Keepr.Repositories
 {
-	public class KeepsRepository : BaseApiRepository<Keep, string>
+	public class KeepsRepository
 	{
 		private readonly IDbConnection _db;
-		public KeepsRepository(IDbConnection db) : base(db, "keeps")
+		public KeepsRepository(IDbConnection db)
 		{
 			_db = db;
+		}
+
+		internal IEnumerable<Keep> Get()
+		{
+			string sql = "SELECT * FROM keeps";
+			return _db.Query<Keep>(sql);
+		}
+
+		internal Keep Get(string id)
+		{
+			string sql = "SELECT * FROM keeps WHERE id = @id";
+			return _db.QueryFirstOrDefault<Keep>(sql, new { id });
 		}
 
 		public void Create(Keep newKeep)
