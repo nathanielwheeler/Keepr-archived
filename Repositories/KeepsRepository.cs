@@ -5,10 +5,10 @@ using Keepr.Models;
 
 namespace Keepr.Repositories
 {
-	public class KeepRepository : BaseApiRepository<Keep, string>
+	public class KeepsRepository : BaseApiRepository<Keep, string>
 	{
 		private readonly IDbConnection _db;
-		public KeepRepository(IDbConnection db) : base(db, "keeps")
+		public KeepsRepository(IDbConnection db) : base(db, "keeps")
 		{
 			_db = db;
 		}
@@ -17,9 +17,9 @@ namespace Keepr.Repositories
 		{
 			string sql = @"
                 INSERT INTO keeps
-                (id, name, description, img, isPrivate, views, shares, keeps)
+                (id, name, description, img, isPrivate, views, shares, keeps, userId)
                 VALUES
-                (@Id, @Name, @Description, @Img, @IsPrivate, @Views, @Shares, @Keeps);";
+                (@Id, @Name, @Description, @Img, @IsPrivate, @Views, @Shares, @Keeps, @UserId);";
 			_db.Execute(sql, newKeep);
 		}
 
@@ -41,7 +41,7 @@ namespace Keepr.Repositories
 
 		public void Delete(string id)
 		{
-			string sql = "DELETE FROM keeps WEHRE id = @id";
+			string sql = "DELETE FROM keeps WHERE id = @id";
 			_db.Execute(sql, new { id });
 		}
 	}

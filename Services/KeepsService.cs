@@ -4,10 +4,10 @@ using Keepr.Repositories;
 
 namespace Keepr.Services
 {
-	public class KeepService : BaseApiService<Keep, string>
+	public class KeepsService : BaseApiService<Keep, string>
 	{
-		private readonly KeepRepository _repo;
-		public KeepService(KeepRepository repo) : base(repo)
+		private readonly KeepsRepository _repo;
+		public KeepsService(KeepsRepository repo) : base(repo)
 		{
 			_repo = repo;
 		}

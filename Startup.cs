@@ -50,8 +50,8 @@ namespace Keepr
 			//NOTE REGISTER SERVICES
 			services.AddTransient<AccountRepository>();
 			services.AddTransient<AccountService>();
-			services.AddTransient<KeepRepository>();
-			services.AddTransient<KeepService>();
+			services.AddTransient<KeepsRepository>();
+			services.AddTransient<KeepsService>();
 		}
 
 		private IDbConnection CreateDbConnection()
