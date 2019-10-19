@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("/api/[controller]")]
 	public class KeepsController : ControllerBase
 	{
 		private readonly KeepsService _ks;
