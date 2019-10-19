@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Keepr.Repositories;
+using Keepr.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,7 +50,8 @@ namespace Keepr
 			//NOTE REGISTER SERVICES
 			services.AddTransient<AccountRepository>();
 			services.AddTransient<AccountService>();
-
+			services.AddTransient<KeepRepository>();
+			services.AddTransient<KeepService>();
 		}
 
 		private IDbConnection CreateDbConnection()
